@@ -1,0 +1,9 @@
+U=rand([3000,1]);
+Theta=acos(1-2*U);
+U=rand([3000,1]);
+Phi=2*pi*U;
+R=1;
+X=R.*sin(Theta).*sin(Phi);
+Y=R.*sin(Theta).*cos(Phi);
+Z=R.*cos(Theta);
+scatter3(X,Y,Z);

@@ -1,10 +1,6 @@
-#include "stdlib.h"
-#include "stdio.h"
-#include "stdint.h"
-#include "limits.h"
+#include "1.h"
 
-static int16_t d=0x20-1;
-static int32_t p=0x80000000-1;
+static int32_t p=0x7FFFFFFF;
 static int16_t a=16807;
 
 int32_t schrage(int32_t seed){
