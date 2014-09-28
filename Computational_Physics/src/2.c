@@ -9,7 +9,7 @@
 
 int main(){
 	FILE *fp=fopen("./output/2.output","w");
-	if(!fp) {printf("Open file error!\n"); exit(-1)}
+	if(!fp) {printf("Open file error!\n"); exit(-1);}
 
 	for(int i=0;i<N;i++){
 
