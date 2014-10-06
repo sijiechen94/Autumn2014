@@ -2,14 +2,16 @@
 
 static int32_t p=0x7FFFFFFF;
 static int16_t a=16807;
+static int32_t seed=0;
 
-int32_t schrage(int32_t seed){
+//Setting the seedd
+void sschrage(int32_t s){
 	if(seed<0) seed=-seed;
-	static int cc=0;
-	if(!cc){
-		cc++;
-	}	
-	
+	seed=s;
+}//sschrage
+
+double schrage(){
+	//Schrage's algorithm for generating next random number
 	int32_t x_high=seed/0x10000;
 	int32_t x_low=seed%0x10000;
 	
@@ -19,6 +21,8 @@ int32_t schrage(int32_t seed){
 	int32_t z=y_high%0x8000*0x10000+y_low;
 	int32_t k=y_high/0x8000;
 
-	if(p-z<k) return z-p+k;
-	else return z+k;
-}
+	if(p-z<k) seed=z-p+k;
+	else seed=z+k;
+
+	return seed/(double)SCHRAGE_MAX;
+}//schrage

@@ -1,22 +1,28 @@
 #include "1.h"
 #include "stdio.h"
-#include "statlib.h"
+#include "stdlib.h"
 
+#define SIZE 10000000
+#define SEED 3
+
+//Some main program to invoke Schrage and do I/O
 int main(){
-	int seed=3;
-	FILE *output=fopen("./output/1.output","w");
+
+	FILE *output=fopen("schrage.binary","w");
+	if(!output){printf("Fopen Error\n!"); exit(0);}
 	double* vector;
-	vector=malloc(100000000*sizeof(double));
+
+	//Maximum memory usage and shortest running time here.
+	//If SIZE is too large for a single malloc,
+	//use some appropriate buffer size for your machine, like 1MB,
+	//will give you overall best performance.
+	vector=malloc(SIZE*sizeof(double));
 	if(!vector){printf("Malloc Error\n!"); exit(0);}
-	for(int i=0; i<100000000; i++){
-		vector[i]=(double)seed/(unsigned long)0x80000000;
-		seed=schrage(seed);
-	}
-	double momentum2=0;
-	momentum(vector,100000000,3,&momentum2);
-	printf("2th momentum:%lf\n",momentum2);
-	double s=0;
-	for(int i=0;i<100000000;i++) s+=vector[i];
-	printf("Simple Mu:%lf\n",s);
+
+	sschrage(SEED);
+	for(int i=0; i<SIZE; i++)
+		vector[i]=schrage();
+	fwrite(vector,sizeof(double),SIZE,output);
+
 	return 0;
 }
