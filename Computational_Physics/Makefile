@@ -1,9 +1,18 @@
 CC = gcc
 G77 = gfortran
 IDIR = ./include
-CFLAGS = -I$(IDIR) -std=c99 -lm
+CFLAGS = -I$(IDIR) -std=c99
 
-all:bin/2.out bin/schrage bin/randomz bin/atof
+all:bin/2.out bin/schrage bin/atof bin/direct bin/dataprocess bin/rejection5
+
+bin/rejection5:obj/rejection5.o obj/discreteCDF.o
+	$(CC) obj/rejection5.o obj/discreteCDF.o -o bin/rejection5 $(CFLAGS)
+
+bin/dataprocess:obj/dataprocess.o
+	$(CC) obj/dataprocess.o -o bin/dataprocess
+
+bin/direct:obj/direct.o obj/discreteCDF.o
+	$(CC) obj/direct.o obj/discreteCDF.o -o bin/direct
 
 bin/randomz:src/randomz.f95
 	$(G77) src/randomz.f95 -o bin/randomz
