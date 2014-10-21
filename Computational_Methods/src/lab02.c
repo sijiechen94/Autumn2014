@@ -3,7 +3,7 @@
 #include "math.h"
 
 long power(int base, int power){
-        long v=base;
+        long v=1;
         for(int i=0; i<power; i++){
                 v*=base;
         }   
@@ -48,7 +48,7 @@ int main(int argc, const char* argv[]){
 	for(int k=0; k<N_RANGE; k++){
 		result[2*k]=Cotes(start,end,sin,(unsigned long)power(2,k));
 		result[2*k+1]=Simpson(start,end,sin,(unsigned long)power(2,k));
-		printf("%12.10lf\t%12.10lf\n",result[2*k],result[2*k+1]);
+		printf("%15.13lf\t%15.13lf\n",result[2*k],result[2*k+1]);
 	}
 
 	return 0;

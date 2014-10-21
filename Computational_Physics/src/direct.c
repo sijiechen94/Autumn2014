@@ -11,7 +11,6 @@
 int main(int argc, const char* argv[]){
 	POINTS data;
 	makecmf(&data,stdin);
-
 	double* vector;
         vector=malloc(SIZE*sizeof(double));
         if(!vector) {printf("MALLOC ERROR!\n"); exit(0);}
