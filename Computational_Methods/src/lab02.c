@@ -22,8 +22,8 @@ double Cotes(double start, double end, double (*fun)(double), unsigned long N){
 }
 
 double Simpson(double start, double end, double (*fun)(double), unsigned long N){
-	//Quit if N is not a even number
-	if(N%2) {printf("Simpson: N is not even!\n"); exit(0);}
+	//Return NaN if N is not a even number
+	if(N%2) {printf("Warning: N=%zu is not even!\n",N); return(nan((void*)0));}
 
 	//Apply summation
 	double h=(end-start)/N;
@@ -44,12 +44,12 @@ int main(int argc, const char* argv[]){
 	if(!result) {printf("MALLOC ERROR!\n"); exit(0);}
 	
 	//Computation and output
-	printf("Cotes\t\tSimpson\n");
 	for(int k=0; k<N_RANGE; k++){
 		result[2*k]=Cotes(start,end,sin,(unsigned long)power(2,k));
 		result[2*k+1]=Simpson(start,end,sin,(unsigned long)power(2,k));
-		printf("%15.13lf\t%15.13lf\n",result[2*k],result[2*k+1]);
 	}
-
+	printf("Cotes\t\t\tSimpson\n");
+	for(int k=0; k<N_RANGE; k++)
+		printf("%16.13lf\t%16.13lf\n",result[2*k],result[2*k+1]);
 	return 0;
 }

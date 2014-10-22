@@ -6,7 +6,7 @@ static int k;
 double h=1;
 
 long power(int base, int power){
-	long v=base;
+	long v=1;
 	for(int i=0; i<power; i++){
 		v*=base;
 	}
