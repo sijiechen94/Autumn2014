@@ -1,4 +1,4 @@
-fp1=fopen('backtoorigin');
+fp1=fopen('/Users/kevinsouldew/Assignments_2014-Autumn/Computational_Physics/backtoorigin');
 A=fread(fp1,[16384,3],'int32');
 A=A';
 i=0.01;
