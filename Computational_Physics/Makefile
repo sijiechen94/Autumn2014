@@ -3,7 +3,16 @@ G77 = gfortran
 IDIR = ./include
 CFLAGS = -I$(IDIR) -std=c99
 
-all:bin/2.out bin/schrage bin/atof bin/direct bin/dataprocess bin/rejection5 bin/rejection4
+all:bin/2.out bin/schrage bin/atof bin/direct bin/dataprocess bin/rejection5 bin/rejection4 bin/Mintegral bin/rwsin bin/backtoorigin
+
+bin/backtoorigin:obj/backtoorigin.o
+	$(CC) OBJ/backtoorigin.o -o bin/backtoorigin $(CFLAGS)
+
+bin/rwsin:obj/rwsin.o
+	$(CC) OBJ/rwsin.o -o bin/rwsin $(CFLAGS)
+
+bin/Mintegral:obj/Mintegral.o
+	$(CC) OBJ/Mintegral.o -o bin/Mintegral $(CFLAGS)
 
 bin/rejection4:obj/rejection4.o
 	$(CC) obj/rejection4.o -o bin/rejection4 $(CFLAGS)
