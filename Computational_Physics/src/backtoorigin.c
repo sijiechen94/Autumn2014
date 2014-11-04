@@ -3,8 +3,9 @@
 #include <string.h>
 
 #define RAND() (double)rand()/RAND_MAX
-#define MAX_LENGTH 65535
-#define SIZE 65536
+#define MAX_LENGTH 16384
+#define SIZE 1048576
+#define DIM 3
 
 int rw1d(int* pos){
 	if(RAND()>0.5) *pos+=1;
@@ -50,21 +51,31 @@ int backtoorigin(int dim, int size, int* result){
 		}
 		result[i]=j+1;
 	}
-	printf("back!\n");
 	return 0;
+}
+
+void transform(int* result, int* output){
+	memset(output,0,DIM*MAX_LENGTH*sizeof(int));
+	for(int i=0;i<SIZE;i++)
+		output[result[i]]++;
+	for(int i=1;i<MAX_LENGTH;i++)
+		output[i]+=output[i-1];
 }
 
 int main(int argc,const char* argv[]){
 
-	int *result;
+	int *result, *output;
 	result=malloc(SIZE*sizeof(int));
-	if(!result){fprintf(stderr,"MALLOC ERROR!\n");exit(0);}
+	output=malloc(MAX_LENGTH*sizeof(int));
+	if(!result||!output){fprintf(stderr,"MALLOC ERROR!\n");exit(0);}
 	FILE *fp;
 	if(!(fp=fopen("backtoorigin","w"))){fprintf(stderr,"FOPEN ERROR!\n");exit(0);}
 
-	for(int i=1;i<4;i++){
+	for(int i=1;i<=DIM;i++){
 		backtoorigin(i,SIZE,result);
-		fwrite(result,sizeof(int),SIZE,fp);
+		transform(result,output);
+		 fwrite(output,sizeof(int),MAX_LENGTH,fp);
 	}
+
 	return 0;
 }

@@ -1,0 +1,10 @@
+fp1=fopen('backtoorigin');
+A=fread(fp1,[16384,3],'int32');
+A=A';
+i=0.01;
+x=linspace(100,16000,7501);
+v1=0.5*log(A(1,floor(x*(1+i)))./A(1,floor(x*(1-i))))./log((floor(x*(1+i)))./(floor(x*(1-i))));
+v2=0.5*log(A(2,floor(x*(1+i)))./A(2,floor(x*(1-i))))./log((floor(x*(1+i)))./(floor(x*(1-i))));
+v3=0.5*log(A(3,floor(x*(1+i)))./A(3,floor(x*(1-i))))./log((floor(x*(1+i)))./(floor(x*(1-i))));
+V=[v1',v2',v3'];
+plot(V);
