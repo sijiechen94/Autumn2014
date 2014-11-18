@@ -16,8 +16,7 @@
 #define isIndex(i) (data.y[(i)-1]<=v)&&(data.y[(i)]>v)
 #define tooSmall(i) data.y[i-1]<=v
 
-#define ARC4RANDOM_MAX 0x100000000                              //arc4random() returns 0~2**32-1
-#define foo4random() ((double)arc4random()/ARC4RANDOM_MAX)      //convert uint32_t to double
+#define foo4random() ((double)rand()/RAND_MAX)      //convert uint32_t to double
 
 typedef struct points{
 	double *x;
