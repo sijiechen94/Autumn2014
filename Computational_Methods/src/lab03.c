@@ -4,9 +4,17 @@
 #include <string.h>
 
 #define MAXREPT 25
-#define EPSILON 1e-6
+#define EPSILON 1e-2
 
 int verbose=0;
+
+double fun2(double x){
+	return pow(x,5)-9;
+}
+
+double dfun2(double x){
+	return 5*pow(x,4)-9;
+}
 
 double fun(double x){
 	return pow(x,3)/3.0-x;
@@ -61,18 +69,18 @@ int main(int argc, const char* argv[]){
 	
 	if(argc==2) if(strcmp(argv[1],"--verbose")==0) verbose=1;
 	int err=0;
-	double x[4]={0.1,0.2,0.9,9.0};
+	double x[4]={2.0,2.0,2.0,2.0};
 	double result;
 	printf("Calling Newtonian\n");
 	for(int i=0;i<4;i++){
-		err=call_Newtonian(x[i],fun,dfun,&result);
+		err=call_Newtonian(x[i],fun2,dfun2,&result);
 		if(err!=0)printf("Warning!Newtonian didn't find a root!\n");
 		else printf("Newtonian:\tRoot around %lf is %19.16lf\n",x[i],result);
 	}
 
 	printf("Calling Secant\n");
 	for(int i=0;i<4;i++){
-		err=call_Secant(-x[i],x[i],fun,&result);
+		err=call_Secant(-x[i],x[i],fun2,&result);
 		if(err!=0)printf("Warning!Secant didn't find a root!\n");
 		else printf("Secant:\t\tRoot around %lf is %19.16lf\n",x[i],result);
 	}
