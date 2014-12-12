@@ -5,7 +5,13 @@ CFLAGS = -I$(IDIR) -std=c99
 
 EXE = bin/2.out bin/schrage bin/atof bin/direct bin/dataprocess bin/rejection5 bin/rejection4 bin/Mintegral bin/rwsin bin/backtoorigin bin/lyapunov bin/dla
 
-all:bin/2.out bin/schrage bin/atof bin/direct bin/dataprocess bin/rejection5 bin/rejection4 bin/Mintegral bin/rwsin bin/backtoorigin bin/lyapunov bin/dla bin/sandbox bin/box bin/hpp
+all:bin/2.out bin/schrage bin/atof bin/direct bin/dataprocess bin/rejection5 bin/rejection4 bin/Mintegral bin/rwsin bin/backtoorigin bin/lyapunov bin/dla bin/sandbox bin/box bin/hpp bin/Markov bin/Markov_gas
+
+bin/Markov_gas:obj/Markov_gas.o
+	$(CC) obj/Markov_gas.o -o bin/Markov_gas $(CFLAGS)
+
+bin/Markov:obj/Markov.o
+	$(CC) obj/Markov.o -o bin/Markov $(CFLAGS)
 
 bin/hpp:obj/hpp.o
 	$(CC) obj/hpp.o -o bin/hpp $(CFLAGS)
